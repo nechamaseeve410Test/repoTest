@@ -1,0 +1,26 @@
+name: Generate Artifact Example
+
+on: [push] # Triggers the workflow on every push
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Simulate creating a build asset (Replace this with your compilation/build steps)
+      - name: Create sample file
+        run: |
+          mkdir -p output
+          echo "Hello, this is my build artifact!" > output/result.txt
+
+      # Step 3: Upload the files as an artifact
+      - name: Upload Artifact to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-build-artifact    # The name of the downloadable ZIP
+          path: output/               # The file or directory path to upload
+          retention-days: 5          # Optional: How long to keep it (default is 90)
